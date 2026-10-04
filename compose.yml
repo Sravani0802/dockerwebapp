@@ -2,7 +2,7 @@ services:
   application:
     image: sravani248/my-dockerhub-repo:image-app
     ports:
-      - "1111:80"
+      - "1111:8080"
     deploy:
       resources:
         reservations:
