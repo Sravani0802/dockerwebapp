@@ -12,9 +12,9 @@ services:
           cpus: "1.0"
           memory: 200M
     depends_on:
-      - database
+      - devopsdb
 
-  database:
+  devopsdb:
     image: sravani248/my-dockerhub-repo:image-db
     ports:
       - "1112:3306"
