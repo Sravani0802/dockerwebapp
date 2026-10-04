@@ -1,6 +1,5 @@
 services:
   application:
-    container_name: cont1
     image: sravani248/my-dockerhub-repo:image-app
     ports:
       - "1111:80"
@@ -16,7 +15,6 @@ services:
       - database
 
   database:
-    container_name: cont2
     image: sravani248/my-dockerhub-repo:image-db
     ports:
       - "1112:3306"
