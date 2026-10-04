@@ -1,26 +1,39 @@
-version: "3.9"
-
 services:
-  devopsdb:
-    image: shaikmustafa/deepika:db
-    ports:
-      - "3306:3306"
-    deploy:
-      replicas: 1
-    networks:
-      - mynetwork
-
   application:
-    image: shaikmustafa/deepika:app
+    container_name: cont1
+    image: sravani248/my-dockerhub-repo:image-app
     ports:
-      - "1111:8080"
+      - "1111:80"
     deploy:
-      replicas: 3
+      resources:
+        reservations:
+          cpus: "0.5"
+          memory: 100M
+        limits:
+          cpus: "1.0"
+          memory: 200M
     depends_on:
-      - devopsdb
-    networks:
-      - mynetwork
+      - database
 
-networks:
-  mynetwork:
-    driver: overlay
+  database:
+    container_name: cont2
+    image: sravani248/my-dockerhub-repo:image-db
+    ports:
+      - "1112:3306"
+    volumes:
+      - userdata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSOWRD: "devopspassword"
+    deploy:
+      resources:
+        reservations:
+          cpus: "1.0"
+          memory: 1000M
+        limits:
+          cpus: "2.0"
+          memory: 2000M
+
+volumes:
+  userdata:
+
+
